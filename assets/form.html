@@ -1,0 +1,64 @@
+<?php 
+require_once('connexionbdd.php');
+?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+    <title>The Formulaire</title>
+</head>
+
+
+<header>
+    <h1>
+        <img src="https://www.wildcodeschool.com/assets/logo_main-e4f3f744c8e717f1b7df3858dce55a86c63d4766d5d9a7f454250145f097c2fe.png"
+            alt="Wild Code School logo" />
+        Les Argonautes
+    </h1>
+</header>
+
+<!-- Main section -->
+<main>
+
+    <!-- New member form -->
+    <h2>Ajouter un(e) Argonaute</h2>
+    <form class="new-member-form" action="" method="POST">
+        <label for="name">Nom de l'Argonaute</label>
+        <input id="name" name="name" type="text" placeholder="Entrez le nom ici" required>
+        <input type="submit" name="btEnv" value="Envoyer" class="submit">
+        <p><a href="accueil.html" class="submit">Annuler</a></p>
+        <label style="text-align: center; color:red;">
+            <?php
+               if(isset($_POST['btEnv'])){
+                   $nom=$_POST['name'];
+
+                $req="INSERT INTO argo (Nom) VALUES ('$nom')"; 
+                $resultat=mysqli_query($conn,$req);
+                
+                if($resultat){
+                    echo "Insertion réussi"
+                }
+                else
+                    echo "Erreur";
+               } 
+            ?>
+
+        </label>
+    </form>
+
+    <!-- Member list -->
+    <h2>Membres de l'équipage</h2>
+    <section class="member-list">
+        <div class="member-item">Eleftheria</div>
+        <div class="member-item">Gennadios</div>
+        <div class="member-item">Lysimachos</div>
+    </section>
+</main>
+
+<footer>
+    <p>Réalisé par Jason en Hécatombéion de l'an 515 avant JC</p>
+</footer>
